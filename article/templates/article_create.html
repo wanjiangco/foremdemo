@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      <li><a href="{% url 'block_list' %}">主页</a></li>
+      <li><a href="{% url 'article_list' blocks.id %}">{{ blocks.block_name }}</a></li>
+      <li class="active">发表文章</li>
+    </ol>
+
+    <form class="form-horizontal" method="POST" action="">{% csrf_token %}
+       <div class="form-group">
+         <label for="inputtitle" class="col-md-1 control-label"><center><span style="font-size:14px">标题</span></center></label>
+         <div class="col-md-10">
+         <input type="text" name="title" class="form-control" id="inputtitle" placeholder="请输入标题">
+         </div>
+       </div>
+       <div class="form-group">
+         <label for="inputname"  class="col-md-1 control-label"><center><span style="font-size:14px">内容</span></center></label>
+         <div class="col-md-10">
+         <textarea class="form-control" rows="28" name="content" id="inputname" placeholder="请输入正文"></textarea>
+         </div>
+       </div>
+        <div class="col-md-2">
+       <span class="pull-right"><button type="submit" class="btn btn-primary">发表</button></span>
+            </div>
+    </form>
+  </div>
+
+  {% if messages  %}
+    {% for message in messages %}
+       <div class="alert alert-info"><center>{{message}}</center></div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
